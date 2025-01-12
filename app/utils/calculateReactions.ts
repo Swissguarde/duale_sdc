@@ -1,6 +1,6 @@
-import { Span, LoadType } from "../types/calculator";
 import { LOAD_TYPES } from "./loadTypes";
 import { FinalMoments } from "./calculateFinalMoments";
+import { Span } from "@/typings";
 
 export interface Reactions {
   [key: string]: number;

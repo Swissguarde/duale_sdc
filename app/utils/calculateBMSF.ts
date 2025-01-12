@@ -1,7 +1,6 @@
-import { Span } from "../types/calculator";
 import { LOAD_TYPES } from "./loadTypes";
-import { FinalMoments } from "./calculateFinalMoments";
 import { calculateSpanReactions } from "./calculateReactions";
+import { Span } from "@/typings";
 
 const numberOfPoints = 100;
 

@@ -1,4 +1,4 @@
-import { Span } from "../types/calculator";
+import { Span } from "@/typings";
 import { LOAD_TYPES } from "./loadTypes";
 
 interface FixedEndMoments {

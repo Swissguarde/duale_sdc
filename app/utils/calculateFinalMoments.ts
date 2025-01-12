@@ -1,4 +1,4 @@
-import { SlopeDeflectionEquation } from "../types/calculator";
+import { SlopeDeflectionEquation } from "@/typings";
 
 export interface FinalMoments {
   [key: string]: number;

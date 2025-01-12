@@ -1,4 +1,4 @@
-import { Span, SlopeDeflectionEquation } from "../types/calculator";
+import { Span, SlopeDeflectionEquation } from "@/typings";
 
 export const generateSlopeDeflectionEquations = (
   spans: Span[],
