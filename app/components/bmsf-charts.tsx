@@ -1,25 +1,13 @@
 import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
+  Area,
+  AreaChart,
+  CartesianGrid,
+  ResponsiveContainer,
   Tooltip,
-  Legend,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
+  XAxis,
+  YAxis,
+} from "recharts";
 import { SpanCriticalPoints } from "../utils/criticalBMSF";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
 
 interface BMSFChartsProps {
   criticalPoints: SpanCriticalPoints[];
@@ -32,80 +20,103 @@ export default function BMSFCharts({ criticalPoints }: BMSFChartsProps) {
   // Sort points by position to ensure correct order
   const sortedPoints = allPoints.sort((a, b) => a.position - b.position);
 
-  const chartData = {
-    labels: sortedPoints.map((point) => point.position.toFixed(2)),
-    datasets: [
-      {
-        label: "Shear Force (kN)",
-        data: sortedPoints.map((point) => point.shearForce),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
-        tension: 0.4,
-      },
-    ],
-  };
+  // Transform data for Recharts
+  const chartData = sortedPoints.map((point) => ({
+    position: point.position,
+    shearForce: point.shearForce,
+    bendingMoment: point.bendingMoment,
+  }));
 
-  const bmChartData = {
-    labels: sortedPoints.map((point) => point.position.toFixed(2)),
-    datasets: [
-      {
-        label: "Bending Moment (kNm)",
-        data: sortedPoints.map((point) => point.bendingMoment),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        tension: 0.4,
-      },
-    ],
-  };
-
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: "top" as const,
-      },
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: "Position (m)",
-        },
-      },
-      y: {
-        title: {
-          display: true,
-          text: "Force (kN)",
-        },
-      },
-    },
-  };
-
-  const bmOptions = {
-    ...options,
-    scales: {
-      ...options.scales,
-      y: {
-        title: {
-          display: true,
-          text: "Moment (kNm)",
-        },
-      },
-    },
-  };
+  // Extract unique positions for XAxis ticks
+  const uniquePositions = Array.from(
+    new Set(chartData.map((item) => item.position))
+  );
 
   return (
     <div className="space-y-8">
       <div>
         <h3 className="text-lg font-semibold mb-4">Shear Force Diagram</h3>
-        <div className="bg-secondary p-4 rounded-lg">
-          <Line data={chartData} options={options} />
+        <div className="bg-secondary p-4 rounded-lg h-[450px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              data={chartData}
+              margin={{ top: 10, right: 30, left: 60, bottom: 30 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="position"
+                type="number"
+                ticks={uniquePositions}
+                domain={["dataMin", "dataMax"]}
+                tickFormatter={(value) => value.toFixed(2)}
+                label={{
+                  value: "Position (m)",
+                  position: "insideBottom",
+                  offset: -10,
+                }}
+              />
+              <YAxis
+                label={{
+                  value: "Force (kN)",
+                  angle: -90,
+                  position: "insideLeft",
+                  offset: -45,
+                }}
+              />
+              <Tooltip />
+              <Area
+                type="linear"
+                dataKey="shearForce"
+                stroke="rgb(53, 162, 235)"
+                fill="rgba(53, 162, 235, 0.5)"
+                fillOpacity={0.5}
+                isAnimationActive={false}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
       </div>
+
       <div>
         <h3 className="text-lg font-semibold mb-4">Bending Moment Diagram</h3>
-        <div className="bg-secondary p-4 rounded-lg">
-          <Line data={bmChartData} options={bmOptions} />
+        <div className="bg-secondary p-4 rounded-lg h-[450px]">
+          <ResponsiveContainer width="100%" height="100%">
+            <AreaChart
+              data={chartData}
+              margin={{ top: 10, right: 30, left: 60, bottom: 30 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis
+                dataKey="position"
+                type="number"
+                ticks={uniquePositions}
+                domain={["dataMin", "dataMax"]}
+                tickFormatter={(value) => value.toFixed(2)}
+                label={{
+                  value: "Position (m)",
+                  position: "insideBottom",
+                  offset: -10,
+                }}
+              />
+              <YAxis
+                label={{
+                  value: "Moment (kNm)",
+                  angle: -90,
+                  position: "insideLeft",
+                  offset: -45,
+                }}
+              />
+              <Tooltip />
+              <Area
+                type="monotone"
+                dataKey="bendingMoment"
+                stroke="rgb(255, 99, 132)"
+                fill="rgba(255, 99, 132, 0.5)"
+                fillOpacity={0.5}
+                isAnimationActive={false}
+              />
+            </AreaChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </div>
