@@ -2,8 +2,8 @@ import { Span } from "@/typings";
 import { LOAD_TYPES } from "./loadTypes";
 
 interface FixedEndMoments {
-  start: number; // negative
-  end: number; // positive
+  start: number;
+  end: number;
 }
 
 export const calculateFixedEndMoments = (span: Span): FixedEndMoments => {

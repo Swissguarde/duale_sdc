@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/app/components/theme-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Slope Deflection Calculator",
+  title: "Duale-SDC",
   description: "Calculate beams & frames",
 };
 

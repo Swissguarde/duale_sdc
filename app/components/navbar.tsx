@@ -27,14 +27,24 @@ export function Navbar() {
           <div className="flex items-center space-x-4">
             <nav className="hidden md:flex space-x-4">
               <Link
-                href="/calculate"
+                href="/beams"
                 className={`text-sm font-medium transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 ${
                   pathname === "/calculate"
                     ? "text-indigo-600 dark:text-indigo-400"
                     : "text-gray-600 dark:text-gray-300"
                 }`}
               >
-                Calculator
+                Beams
+              </Link>
+              <Link
+                href="/beams"
+                className={`text-sm font-medium transition-colors hover:text-indigo-600 dark:hover:text-indigo-400 ${
+                  pathname === "/calculate"
+                    ? "text-indigo-600 dark:text-indigo-400"
+                    : "text-gray-600 dark:text-gray-300"
+                }`}
+              >
+                Frames
               </Link>
             </nav>
 
