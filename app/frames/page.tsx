@@ -267,14 +267,12 @@ export default function FramesPage() {
           )}
 
           <Button
-            type="submit"
-            className="w-full py-6 text-lg font-semibold bg-black dark:bg-gray-900 hover:bg-gray-900 dark:hover:bg-black text-white rounded-lg transition-all duration-300 shadow-xl hover:shadow-2xl backdrop-blur-sm relative group"
             disabled={
               formData.numberOfColumns === 0 && formData.numberOfBeams === 0
             }
+            className="w-full hover:bg-indigo-300 duration-300"
           >
-            <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg opacity-40 blur-lg filter group-hover:opacity-80 transition duration-200" />
-            <span className="relative">Submit</span>
+            SUBMIT
           </Button>
         </form>
 

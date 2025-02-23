@@ -55,45 +55,12 @@ export default function Home() {
           </p>
 
           <div className="mt-10 flex items-center justify-center gap-6">
-            <motion.div
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
-            >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt" />
-              <Link href="/beams">
-                <Button
-                  size="lg"
-                  className="relative px-8 py-6 bg-black dark:bg-gray-900 hover:bg-gray-900 dark:hover:bg-black text-white rounded-lg transition-all duration-300 shadow-xl hover:shadow-2xl backdrop-blur-sm"
-                >
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-indigo-600 to-purple-600 rounded-lg opacity-90 blur-lg filter group-hover:opacity-100 transition duration-200" />
-                  <span className="relative flex items-center">
-                    <span className="mr-3 text-lg font-semibold">Beams</span>
-                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </Button>
-              </Link>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.05, y: -5 }}
-              whileTap={{ scale: 0.95 }}
-              className="relative"
-            >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-600 to-indigo-600 rounded-lg blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-tilt" />
-              <Link href="/frames">
-                <Button
-                  size="lg"
-                  className="relative px-8 py-6 bg-black dark:bg-gray-900 hover:bg-gray-900 dark:hover:bg-black text-white rounded-lg transition-all duration-300 shadow-xl hover:shadow-2xl backdrop-blur-sm"
-                >
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-br from-purple-600 to-indigo-600 rounded-lg opacity-90 blur-lg filter group-hover:opacity-100 transition duration-200" />
-                  <span className="relative flex items-center">
-                    <span className="mr-3 text-lg font-semibold">Frames</span>
-                    <ArrowRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </span>
-                </Button>
-              </Link>
-            </motion.div>
+            <Link href="/beams">
+              <Button>Beams</Button>
+            </Link>
+            <Link href="/frames">
+              <Button>Frames</Button>
+            </Link>
           </div>
         </motion.div>
 
